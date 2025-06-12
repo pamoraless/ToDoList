@@ -24,5 +24,5 @@
   echo '<br>';
   echo 'Protocol version: '.$mysqli->protocol_version;
 
-  $mysqli->close();
+  $conn = $mysqli;
 ?>

@@ -5,21 +5,19 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $descripcion = $_POST['descripcion'] ?? '';
-        $completada = $_POST['completada'] ?? '';
+        //completada es binario, es decir 0 o 1
+        $completada = isset($_POST['completada']) && $_POST['completada'] == '1' ? 1 : 0;
 
-        $sql = "INSERT INTO tarea (descripcion, completada) VALUES ('$descripcion','$completada')";
+        $sql = "INSERT INTO tareas (descripcion, completada) VALUES ('$descripcion', $completada)";
 
-        if($mysqli->query($sql) == TRUE){
-
+        if($conn->query($sql) == TRUE){
+            header("Location: index.php");
+            exit();
         }else{
             echo "No se realizo la conexion";
         }
     }else{
         echo "No se recibieron los datos";
     }
-
-
-
-
 
 ?>
