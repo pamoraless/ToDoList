@@ -48,7 +48,7 @@ $resultado = $conn->query($sql);
 
                     <!-- Botones -->
                     <a href="tareacompletada.php?id=<?= $tarea['id'] ?>">[✔]</a>
-                    <a href="modificartarea.php?id=<?= $tarea['id'] ?>">[✎]</a>
+                    <a href="modificar_tarea.php?id=<?= $tarea['id'] ?>">[✎]</a>
                     <a href="eliminartarea.php?id=<?= $tarea['id'] ?>">[🗑]</a>
                 </li>
             <?php endwhile; ?>
