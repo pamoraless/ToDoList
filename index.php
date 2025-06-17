@@ -71,7 +71,7 @@ if ((isset($_SESSION['usuario']) && isset($_SESSION['id_usuario'])) || (isset($_
         }
     </style>
 </head>
-<body>
+<body class="pagina-index">
     <h2> Bienvenido a la Lista de Tareas</h2>
 
     <!--Formulario de Registro -->

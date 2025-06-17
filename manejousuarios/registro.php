@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($stmt->execute()){
         //Guardamos la sesion
         $_SESSION['usuario'] = $usuario;
+        $_SESSION['id_usuario'] = $id_usuario;
         header("Location: ../visualizadortareas.php");
         exit();
     } else {

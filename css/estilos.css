@@ -1,0 +1,80 @@
+.pagina-visualizador body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #f4f4f4;
+}
+.pagina-visualizador h1 {
+    text-align: center;
+}
+.pagina-visualizador .tarea {
+    background: white;
+    padding: 15px;
+    margin: 10px auto;
+    border-radius: 8px;
+    max-width: 500px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.pagina-visualizador .completado {
+    text-decoration: line-through;
+    color: green;
+}
+.pagina-visualizador form.inline {
+    display: inline;
+}
+.pagina-visualizador input[type="text"] {
+    padding: 5px;
+    width: 200px;
+}
+.pagina-visualizador button {
+    padding: 5px 10px;
+    margin-left: 5px;
+}
+
+.pagina-index body {
+    font-family: Arial, sans-serif;
+    max-width: 400px;
+    margin: 40px auto;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+}
+.pagina-index h2 {
+    text-align: center;
+}
+.pagina-index form {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;         
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.pagina-index input[type="text"], .pagina-index input[type="password"] {
+    width: 95%;
+    padding: 8px;
+    margin: 6px 0 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.pagina-index button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color:white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.pagina-index button:hover {
+    background-color: #0056b3;
+}
+.pagina-index .btn-invitado {
+    background-color: #28a745;
+    margin-top: 10px;
+}
+.pagina-index .btn-invitado:hover {
+    background-color: #1e7e34;
+}

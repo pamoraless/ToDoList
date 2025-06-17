@@ -9,10 +9,9 @@ if (!isset($_SESSION['id_usuario']) && !isset($_SESSION['es_invitado'])) {
     header("Location: index.php");
     exit();
 }
-
+ 
 $usuario_id = $_SESSION['id_usuario'] ?? null;
 $es_invitado = isset($_SESSION['usuario']) && $_SESSION['usuario'] === 'invitado';
-
 
 // ejemplo de la lista de tareas 0,1
 /*$tareas = [
@@ -54,57 +53,10 @@ $tareas_completadas = [];
 <head>
     <meta charset="UTF-8">
     <title>Lista de Tareas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            text-align: center;
-        }
-        .tarea {
-            background: white;
-            padding: 15px;
-            margin: 10px auto;
-            border-radius: 8px;
-            max-width: 500px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .completado {
-            text-decoration: line-through;
-            color: green;
-        }
-        form.inline {
-            display: inline;
-        }
-        input[type="text"] {
-            padding: 5px;
-            width: 200px;
-        }
-        button {
-            padding: 5px 10px;
-            margin-left: 5px;
-        }
-    </style>
-    <script>
-        function toggleCompletadas() {
-            const section = document.getElementById('tareas-completadas');
-            const boton = document.getElementById('btn-toggle');
-            if (section.style.display === 'none') {
-                section.style.display = 'block';
-                boton.textContent = 'Ocultar tareas completadas';
-            } else {
-                section.style.display = 'none';
-                boton.textContent = 'Mostrar tareas completadas';
-            }
-        }
-    </script>
+   <link rel="stylesheet" href="css/estilos.css">
+   <script src="js/scripts.js" defer></script>
 </head>
-<body>
+<body class="pagina-visualizador">
 <?php if (isset($_SESSION['usuario'])): ?>
     <form action="manejousuarios/logout.php" method="post" style="text-align: right; margin-bottom: 15px;">
         <button type="submit">Cerrar sesión</button>
