@@ -11,6 +11,6 @@ if (isset($_GET['id'])) {
 
 //Agregar un mensaje de exito o fracaso
 
-header("Location: index.php");
+header("Location: frontend.php");
 exit();
 ?>

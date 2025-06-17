@@ -18,11 +18,11 @@
     exit();
   }
 
-  echo 'Success: A proper connection to MySQL was made.';
+  /*echo 'Success: A proper connection to MySQL was made.';
   echo '<br>';
   echo 'Host information: '.$mysqli->host_info;
   echo '<br>';
-  echo 'Protocol version: '.$mysqli->protocol_version;
+  echo 'Protocol version: '.$mysqli->protocol_version;*/
 
   $conn = $mysqli;
 ?>

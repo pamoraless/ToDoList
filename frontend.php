@@ -1,15 +1,17 @@
 <?php
-// Lista de tareas que tenemos
-$tareas = [
-    ['nombre' => 'Limpiar la casa', 'completado' => true],
-    ['nombre' => 'Preparar la comida', 'completado' => false],
-    ['nombre' => 'Cambiar las toallas', 'completado' => false]
-];
+require 'conexion.php';
 
-// esto lo tenemos en caso de que se haya enviado el formulario, lo que actualiza los cambios
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    foreach ($tareas as $index => $tarea) {
-        $tareas[$index]['completado'] = isset($_POST['tarea'][$index]);
+//obtener tareas de la base de datos
+$tareas = [];
+$resultado = $conn->query("SELECT * FROM tareas ORDER BY completada ASC, id DESC");
+
+if ($resultado && $resultado->num_rows > 0) {
+    while ($fila = $resultado->fetch_assoc()) {
+        $tareas[] = [
+            'id' => $fila['id'],
+            'nombre' => $fila['descripcion'],
+            'completado' => $fila['completada'] == 1
+        ];
     }
 }
 ?>
@@ -33,43 +35,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             padding: 15px;
             margin: 10px auto;
             border-radius: 8px;
-            max-width: 400px;
+            max-width: 500px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .completado {
             text-decoration: line-through;
             color: green;
         }
+        form.inline {
+            display: inline;
+        }
+        input[type="text"] {
+            padding: 5px;
+            width: 200px;
+        }
         button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 25px; 
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
+            padding: 5px 10px;
+            margin-left: 5px;
         }
     </style>
 </head>
 <body>
 
-<h1>Mi lista de tareas</h1> 
+<h1>Mi lista de tareas</h1>
 
-<form method="post">  
-    <?php foreach ($tareas as $index => $tarea): ?>
-        <div class="tarea">
-            <label>
-                <input type="checkbox" name="tarea[<?= $index ?>]" <?= $tarea['completado'] ? 'checked' : '' ?>> // esto es el que verifica si esta completado
-                <span class="<?= $tarea['completado'] ? 'completado' : '' ?>">
-                    <?= htmlspecialchars($tarea['nombre']) ?>
-                </span>
-            </label>
-        </div>
-    <?php endforeach; ?>
-
-    <button type="submit">Actualizar</button> // el boton de actualizar 
+<!-- Formulario para crear nueva tarea -->
+<form action="creartarea.php" method="post" style="text-align: center; margin-bottom: 30px;">
+    <input type="text" name="descripcion" placeholder="Nueva tarea" required>
+    <button type="submit">Agregar</button>
 </form>
+
+<?php foreach ($tareas as $tarea): ?>
+    <div class="tarea">
+        <div>
+            <!-- Formulario para marcar como completado -->
+            <form class="inline" action="tareacompletada.php" method="get">
+                <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
+                <input type="checkbox" onchange="this.form.submit()" <?= $tarea['completado'] ? 'checked' : '' ?>>
+            </form>
+
+            <!-- Mostrar nombre -->
+            <span class="<?= $tarea['completado'] ? 'completado' : '' ?>">
+                <?= htmlspecialchars($tarea['nombre']) ?>
+            </span>
+        </div>
+
+        <!-- Botón para eliminar -->
+        <form class="inline" action="eliminartarea.php" method="get" onsubmit="return confirm('¿Eliminar esta tarea?');">
+            <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
+            <button type="submit">🗑️</button>
+        </form>
+
+        <!-- Botón para modificar -->
+        <form class="inline" action="modificar_tarea.php" method="post">
+            <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
+            <input type="text" name="nueva_descripcion" placeholder="Nuevo nombre" required>
+            <button type="submit">✏️</button>
+        </form>
+    </div>
+<?php endforeach; ?>
 
 </body>
 </html>

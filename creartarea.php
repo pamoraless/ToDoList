@@ -11,7 +11,7 @@
         $sql = "INSERT INTO tareas (descripcion, completada) VALUES ('$descripcion', $completada)";
 
         if($conn->query($sql) == TRUE){
-            header("Location: index.php");
+            header("Location: frontend.php");
             exit();
         }else{
             echo "No se realizo la conexion";
