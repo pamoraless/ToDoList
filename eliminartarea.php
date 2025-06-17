@@ -1,6 +1,7 @@
 <?php
-require 'conexion.php';
 session_start();
+require 'conexion.php';
+
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];

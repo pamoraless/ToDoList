@@ -1,6 +1,7 @@
 <?php
-    require 'conexion.php';
     session_start();
+    require 'conexion.php';
+    
 
     //Se verifica que el formulario haya sido enviado 
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){

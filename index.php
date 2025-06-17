@@ -1,8 +1,12 @@
 <?php
  
  session_start();
+ /*Manejo de errores*/
  $registro_error = $_SESSION['registro_error'] ?? '';
  unset($_SESSION['registro_error']);
+
+ $login_error = $_SESSION['login_error'] ?? '';
+ unset($_SESSION['login_error']);
 
 // Si ya está logeado o es invitado, se redirige al visualizadortareas.php
 if(isset($_SESSION['usuario'])) {
@@ -90,6 +94,12 @@ if(isset($_SESSION['usuario'])) {
         <input type="password" name="contrasena" placeholder="Contraseña" required />
         <button type="submit">Entrar</button>
     </form>
+
+    <?php if(!empty($login_error)): ?>
+        <div style="color: red; text-align: center; margin-bottom: 15px;">
+            <?= htmlspecialchars($login_error) ?>
+        </div>
+    <?php endif; ?>
 
     <!--Botón para modo invitado -->
     <form action ="modo_invitado.php"  method="post">
