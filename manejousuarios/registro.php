@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'conexion.php';
+require '../conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = trim($_POST['nombre_usuario'] ?? '');
@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($usuario) || empty($contrasena)) {
         $_SESSION['registro_error'] = 'Debes completar todos los campos.';
-        header("Location: index.php");
+        header("Location: ../index.php");
         exit();
     }
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($stmt->num_rows > 0) {
         $stmt->close();
         $_SESSION['registro_error'] = 'Ese nombre de usuario ya está en uso.';
-        header("Location: index.php");
+        header("Location: ../index.php");
         exit();
     }
 
@@ -36,18 +36,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($stmt->execute()){
         //Guardamos la sesion
         $_SESSION['usuario'] = $usuario;
-        header("Location: visualizadortareas.php");
+        header("Location: ../visualizadortareas.php");
         exit();
     } else {
         $_SESSION['registro_error'] = 'Error al registrar: ' . $conn->error;
-        header("Location: index.php");
+        header("Location: ../index.php");
         exit();
     }
     
     $stmt->close();
 } else {
     $_SESSION['registro_error'] = 'Acceso no permitido.';
-        header("Location: index.php");
+        header("Location: ../index.php");
         exit();
     }
 ?>

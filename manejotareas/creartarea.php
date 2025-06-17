@@ -1,7 +1,7 @@
 <?php
 session_start();
 //var_dump($_SESSION); 
-    require 'conexion.php';
+    require '../conexion.php';
 
     //Se verifica que el formulario haya sido enviado 
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -12,7 +12,7 @@ session_start();
         
         // Verificar que el usuario está logeado
         if (!isset($_SESSION['id_usuario']) && !isset($_SESSION['es_invitado'])) {
-            header("Location: index.php");
+            header("Location: ../index.php");
             exit();
         }
 
@@ -36,7 +36,7 @@ session_start();
         }
     
         if ($stmt->execute()) {
-            header("Location: visualizadortareas.php");
+            header("Location: ../visualizadortareas.php");
             exit();
         } else {
             echo "Error al agregar la tarea.";

@@ -106,7 +106,7 @@ $tareas_completadas = [];
 </head>
 <body>
 <?php if (isset($_SESSION['usuario'])): ?>
-    <form action="logout.php" method="post" style="text-align: right; margin-bottom: 15px;">
+    <form action="manejousuarios/logout.php" method="post" style="text-align: right; margin-bottom: 15px;">
         <button type="submit">Cerrar sesión</button>
     </form>
 <?php endif; ?>
@@ -114,7 +114,7 @@ $tareas_completadas = [];
 <h1>Mi lista de tareas</h1>
 
 <!-- Formulario para crear nueva tarea -->
-<form action="creartarea.php" method="post" style="text-align: center; margin-bottom: 30px;">
+<form action="manejotareas/creartarea.php" method="post" style="text-align: center; margin-bottom: 30px;">
     <input type="text" name="descripcion" placeholder="Nueva tarea" required>
     <button type="submit">Agregar</button>
 </form>
@@ -126,7 +126,7 @@ $tareas_completadas = [];
         <div class="tarea">
             <div>
                 <!-- Formulario para marcar como completado -->
-                <form class="inline" action="tareacompletada.php" method="get">
+                <form class="inline" action="manejotareas/tareacompletada.php" method="get">
                     <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
                     <input type="checkbox" onchange="this.form.submit()" <?= $tarea['completada'] ? 'checked' : '' ?>>
                 </form>
@@ -138,13 +138,13 @@ $tareas_completadas = [];
             </div>
 
             <!-- Botón para eliminar -->
-            <form class="inline" action="eliminartarea.php" method="get" onsubmit="return confirm('¿Eliminar esta tarea?');">
+            <form class="inline" action="manejotareas/eliminartarea.php" method="get" onsubmit="return confirm('¿Eliminar esta tarea?');">
                 <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
                 <button type="submit">🗑️</button>
             </form>
 
             <!-- Botón para modificar -->
-            <form class="inline" action="modificar_tarea.php" method="post">
+            <form class="inline" action="manejotareas/modificar_tarea.php" method="post">
                 <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
                 <input type="text" name="nueva_descripcion" placeholder="Nuevo nombre" required>
                 <button type="submit">✏️</button>
@@ -166,7 +166,7 @@ $tareas_completadas = [];
             <div class="tarea">
                 <div>
                     <!-- Checkbox ya marcado -->
-                    <form class="inline" action="descompletartarea.php" method="get">
+                    <form class="inline" action="manejotareas/descompletartarea.php" method="get">
                     <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
                     <input type="checkbox" onchange="this.form.submit()" <?= $tarea['completada'] ? 'checked' : '' ?>>
                 </form>
@@ -174,7 +174,7 @@ $tareas_completadas = [];
                 </div>
 
                 <!-- Eliminar -->
-                <form class="inline" action="eliminartarea.php" method="get" onsubmit="return confirm('¿Eliminar esta tarea?');">
+                <form class="inline" action="manejotareas/eliminartarea.php" method="get" onsubmit="return confirm('¿Eliminar esta tarea?');">
                     <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
                     <button type="submit">🗑️</button>
                 </form>

@@ -76,7 +76,7 @@ if ((isset($_SESSION['usuario']) && isset($_SESSION['id_usuario'])) || (isset($_
 
     <!--Formulario de Registro -->
    
-    <form action="registro.php" method="post">
+    <form action="manejousuarios/registro.php" method="post">
         <h3>Registarse</h3>
         <input type="text" name="nombre_usuario" placeholder="Nombre de usuario" required />
         <input type="password" name="contrasena" placeholder="Contraseña" required />
@@ -90,7 +90,7 @@ if ((isset($_SESSION['usuario']) && isset($_SESSION['id_usuario'])) || (isset($_
     <?php endif; ?>
 
     <!-- Formulario de Inicio de Sesión -->
-    <form action="login.php" method="post">
+    <form action="manejousuarios/login.php" method="post">
         <h3>Iniciar sesión</h3>
         <input type="text" name="nombre_usuario" placeholder="Nombre de Usuario" required />
         <input type="password" name="contrasena" placeholder="Contraseña" required />
@@ -104,7 +104,7 @@ if ((isset($_SESSION['usuario']) && isset($_SESSION['id_usuario'])) || (isset($_
     <?php endif; ?>
 
     <!--Botón para modo invitado -->
-    <form action ="modo_invitado.php"  method="post">
+    <form action ="manejousuarios/modo_invitado.php"  method="post">
         <button type="submit" class="btn-invitado">Entrar como invitado</button>
     </form>
     

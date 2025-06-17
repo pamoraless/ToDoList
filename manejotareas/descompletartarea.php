@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'conexion.php';
+require '../conexion.php';
 
 
 
@@ -12,6 +12,6 @@ if (isset($_GET['id'])) {
     $stmt->close();
 }
 
-header("Location: visualizadortareas.php");
+header("Location: ../visualizadortareas.php");
 exit();
 ?>

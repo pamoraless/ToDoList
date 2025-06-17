@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'conexion.php';
+require '../conexion.php';
 
 
 if (isset($_GET['id'])) {
@@ -13,6 +13,6 @@ if (isset($_GET['id'])) {
 
 //Agregar un mensaje de exito o fracaso
 
-header("Location: visualizadortareas.php");
+header("Location: ../visualizadortareas.php");
 exit();
 ?>
