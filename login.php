@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Verificar contraseña
         if (password_verify($contrasena, $hash_guardado)) {
             $_SESSION['usuario'] = $usuario;
+            $_SESSION['id_usuario'] = $id_usuario;
             header("Location: visualizadortareas.php");
             exit();
         } else {
@@ -38,13 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
+
     $stmt->close();
 } else {
     $_SESSION['login_error'] = 'Acceso no permitido.';
     header("Location: index.php");
     exit();
 }
-?>
-
-
 ?>

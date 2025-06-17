@@ -1,6 +1,8 @@
 <?php
  
  session_start();
+//var_dump($_SESSION);
+//exit();
  /*Manejo de errores*/
  $registro_error = $_SESSION['registro_error'] ?? '';
  unset($_SESSION['registro_error']);
@@ -9,7 +11,7 @@
  unset($_SESSION['login_error']);
 
 // Si ya está logeado o es invitado, se redirige al visualizadortareas.php
-if(isset($_SESSION['usuario'])) {
+if (isset($_SESSION['usuario']) && isset($_SESSION['id_usuario'])) {
     header("Location: visualizadortareas.php");
     exit();
 }

@@ -2,6 +2,18 @@
 require 'conexion.php';
 session_start();
 
+/*var_dump($_SESSION);
+exit();*/
+
+if (!isset($_SESSION['id_usuario'])) {
+    header("Location: index.php");
+    exit();
+}
+
+$usuario_id = $_SESSION['id_usuario'] ?? null;
+$es_invitado = ($_SESSION['usuario'] === 'invitado');
+
+
 // ejemplo de la lista de tareas 0,1
 /*$tareas = [
     ['id' => 1, 'nombre' => 'Limpiar la casa', 'completado' => true],
@@ -11,12 +23,22 @@ session_start();
 */
 //obtener tareas de la base de datos
 $tareas = [];
-$resultado = $conn->query("SELECT * FROM tareas ORDER BY completada ASC, id DESC");
+if ($es_invitado) {
+    // Si es invitado, mostrar todas las tareas
+    $query = "SELECT id, descripcion, completada FROM tareas ORDER BY completada ASC, id DESC";
+    $stmt = $conn->prepare($query);
+} else {
+    // Si es usuario registrado, filtrar por su id
+    $query = "SELECT id, descripcion, completada FROM tareas WHERE usuario_id = ? ORDER BY completada ASC, id DESC";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $usuario_id);
+}
+$stmt->execute();
+$resultado = $stmt->get_result();
 
 $tareas_pendientes = [];
 $tareas_completadas = [];
 
-if ($resultado && $resultado->num_rows > 0) {
     while ($tarea = $resultado->fetch_assoc()) {
         if ($tarea['completada']) {
             $tareas_completadas[] = $tarea;
@@ -24,7 +46,6 @@ if ($resultado && $resultado->num_rows > 0) {
             $tareas_pendientes[] = $tarea;
         }
     }
-}
 
 ?>
 
