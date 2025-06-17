@@ -1,5 +1,6 @@
 <?php
     require 'conexion.php';
+    session_start();
 
     //Se verifica que el formulario haya sido enviado 
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -11,7 +12,7 @@
         $sql = "INSERT INTO tareas (descripcion, completada) VALUES ('$descripcion', $completada)";
 
         if($conn->query($sql) == TRUE){
-            header("Location: index.php");
+            header("Location: visualizadortareas.php");
             exit();
         }else{
             echo "No se realizo la conexion";

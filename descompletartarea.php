@@ -1,5 +1,7 @@
 <?php
 require 'conexion.php';
+session_start();
+
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -9,6 +11,6 @@ if (isset($_GET['id'])) {
     $stmt->close();
 }
 
-header("Location: index.php");
+header("Location: visualizadortareas.php");
 exit();
 ?>

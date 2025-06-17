@@ -1,5 +1,6 @@
 <?php
 require 'conexion.php'; // Tu archivo de conexión a la base de datos
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'] ?? '';

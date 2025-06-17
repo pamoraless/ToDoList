@@ -12,6 +12,7 @@
 
 <?php
 include 'conexion.php';
+session_start();
 
 // Obtener tareas
 $sql = "SELECT * FROM tareas ORDER BY completada ASC, id DESC";
