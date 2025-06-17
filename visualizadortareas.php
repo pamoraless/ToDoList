@@ -84,6 +84,11 @@ if ($resultado && $resultado->num_rows > 0) {
     </script>
 </head>
 <body>
+<?php if (isset($_SESSION['usuario'])): ?>
+    <form action="logout.php" method="post" style="text-align: right; margin-bottom: 15px;">
+        <button type="submit">Cerrar sesión</button>
+    </form>
+<?php endif; ?>
 
 <h1>Mi lista de tareas</h1>
 
