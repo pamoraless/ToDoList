@@ -5,13 +5,13 @@ session_start();
 /*var_dump($_SESSION);
 exit();*/
 
-if (!isset($_SESSION['id_usuario'])) {
+if (!isset($_SESSION['id_usuario']) && !isset($_SESSION['es_invitado'])) {
     header("Location: index.php");
     exit();
 }
 
 $usuario_id = $_SESSION['id_usuario'] ?? null;
-$es_invitado = ($_SESSION['usuario'] === 'invitado');
+$es_invitado = isset($_SESSION['usuario']) && $_SESSION['usuario'] === 'invitado';
 
 
 // ejemplo de la lista de tareas 0,1
@@ -25,7 +25,7 @@ $es_invitado = ($_SESSION['usuario'] === 'invitado');
 $tareas = [];
 if ($es_invitado) {
     // Si es invitado, mostrar todas las tareas
-    $query = "SELECT id, descripcion, completada FROM tareas ORDER BY completada ASC, id DESC";
+    $query = "SELECT id, descripcion, completada FROM tareas WHERE usuario_id IS NULL ORDER BY completada ASC, id DESC";
     $stmt = $conn->prepare($query);
 } else {
     // Si es usuario registrado, filtrar por su id

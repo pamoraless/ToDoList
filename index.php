@@ -11,7 +11,7 @@
  unset($_SESSION['login_error']);
 
 // Si ya está logeado o es invitado, se redirige al visualizadortareas.php
-if (isset($_SESSION['usuario']) && isset($_SESSION['id_usuario'])) {
+if ((isset($_SESSION['usuario']) && isset($_SESSION['id_usuario'])) || (isset($_SESSION['es_invitado']) && $_SESSION['es_invitado'] === true)){
     header("Location: visualizadortareas.php");
     exit();
 }
