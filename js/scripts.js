@@ -1,11 +1,14 @@
-function toggleCompletadas() {
-    const section = document.getElementById('tareas-completadas');
-    const boton = document.getElementById('btn-toggle');
-    if (section.style.display === 'none') {
-        section.style.display = 'block';
-        boton.textContent = 'Ocultar tareas completadas';
-    } else {
-        section.style.display = 'none';
-        boton.textContent = 'Mostrar tareas completadas';
-    }
-}
+document.addEventListener("DOMContentLoaded", function () {
+    const boton = document.getElementById("btn-toggle");
+    const completadas = document.getElementById("completadas");
+
+    boton.addEventListener("click", function () {
+        if (completadas.style.display === "none") {
+            completadas.style.display = "block";
+            boton.textContent = "Ocultar tareas completadas";
+        } else {
+            completadas.style.display = "none";
+            boton.textContent = "Mostrar tareas completadas";
+        }
+    });
+});
