@@ -1,29 +1,24 @@
 <?php
 session_start();
-require '../conexion.php'; 
+require '../conexion.php';
 
+$id = $_POST['id'] ?? '';
+$nueva_descripcion = $_POST['nueva_descripcion'] ?? '';
+$mensaje = "";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'] ?? '';
-    $nueva_descripcion = $_POST['nueva_descripcion'] ?? '';
+if ($id !== '' && $nueva_descripcion !== '') {
+    $stmt = $conn->prepare("UPDATE tareas SET descripcion = ? WHERE id = ?");
+    $stmt->bind_param("si", $nueva_descripcion, $id);
 
-    //SE USA EMPTY para asegurarnos de que los valores $id $nueva_descripcion no esten vacios
-    if (!empty($id) && !empty($nueva_descripcion)) {
-        // Evita inyección SQL con prepared statements
-        $stmt = $mysqli->prepare("UPDATE tarea SET descripcion = ? WHERE id = ?");
-        $stmt->bind_param("si", $nueva_descripcion, $id);
-
-        if ($stmt->execute()) {
-            echo "La descripción fue actualizada correctamente.";
-        } else {
-            echo "Error al actualizar la tarea: " . $stmt->error;
-        }
-
-        $stmt->close();
+    if ($stmt->execute()) {
+        $mensaje = "Descripción actualizada correctamente.";
+        header("Location: ../visualizadortareas.php");
     } else {
-        echo "ID y nueva descripción son obligatorios.";
+        $mensaje = "Error al actualizar: " . $stmt->error;
     }
-} else {
-    echo "No se recibieron los datos por POST.";
+
+    $stmt->close();
 }
 ?>
+
+
