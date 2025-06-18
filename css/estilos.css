@@ -16,6 +16,16 @@ body.pagina-visualizador  {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10 px;
+    flex-wrap: wrap;
+}
+.pagina-visualizador .tarea > div:first-child {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    word-break: break-word;
 }
 .pagina-visualizador .completado {
     text-decoration: line-through;
@@ -23,7 +33,17 @@ body.pagina-visualizador  {
 }
 .pagina-visualizador form.inline {
     display: inline;
-
+}
+.pagina-visualizador .form-modificar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.pagina-visualizador .formulario-editar input[type="text"] {
+    width: 180px;
+    max-width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
 }
 .pagina-visualizador input[type="text"] {
     padding: 5px;
