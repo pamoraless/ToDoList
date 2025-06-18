@@ -95,12 +95,20 @@ $tareas_completadas = [];
                         <button type="submit">🗑️</button>
                     </form>
 
-                    <!-- Botón para modificar -->
-                    <form class="inline" action="manejotareas/modificar_tarea.php" method="post">
-                        <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
-                        <input type="text" name="nueva_descripcion" placeholder="Nuevo nombre" required>
-                        <button type="submit">✏️</button>
-                    </form>
+                    <div class="form-modificar" id="form-<?= $tarea['id'] ?>">
+                        <!-- Botón lápiz visible al inicio -->
+                        <button type="button" class="boton-editar" onclick="mostrarInput(<?= $tarea['id'] ?>)">✏️</button>
+
+                        <!-- Contenedor oculto con el formulario -->
+                        <div class="formulario-editar" style="display: none;">
+                            <form class="inline" action="manejotareas/modificar_tarea.php" method="post">
+                                <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
+                                <input type="text" name="nueva_descripcion" placeholder="Nuevo nombre" required>
+                                <button type="submit" style="background-color: #28a745; color:white;">✅</button>
+                                <button type="button" onclick="cancelarEdicion(<?= $tarea['id'] ?>)" style="background-color: #dc3545; color:white;">❌</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>

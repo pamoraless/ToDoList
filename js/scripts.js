@@ -12,3 +12,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+function mostrarInput(id) {
+    const contenedor = document.getElementById(`form-${id}`);
+    const botonLapiz = contenedor.querySelector(".boton-editar");
+    const formularioDiv = contenedor.querySelector(".formulario-editar");
+
+    botonLapiz.style.display = "none";
+    formularioDiv.style.display = "block";
+
+    const input = formularioDiv.querySelector("input[type='text']");
+    input.focus();
+}
+
+function cancelarEdicion(id) {
+    const contenedor = document.getElementById(`form-${id}`);
+    const botonLapiz = contenedor.querySelector(".boton-editar");
+    const formularioDiv = contenedor.querySelector(".formulario-editar");
+
+    formularioDiv.style.display = "none";
+    botonLapiz.style.display = "inline";
+
+    const input = formularioDiv.querySelector("input[type='text']");
+    input.value = "";
+}
+
