@@ -98,8 +98,8 @@ $tareas_completadas = [];
                             <form class="inline" action="manejotareas/modificar_tarea.php" method="post">
                                 <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
                                 <input type="text" name="nueva_descripcion" placeholder="Nuevo nombre" required>
-                                <button type="submit" style="background-color: #28a745; color:white;">✅</button>
-                                <button type="button" onclick="cancelarEdicion(<?= $tarea['id'] ?>)" style="background-color: #dc3545; color:white;">❌</button>
+                                <button type="submit" >✅</button>
+                                <button type="button" onclick="cancelarEdicion(<?= $tarea['id'] ?>)">❌</button>
                             </form>
                         </div>
 
@@ -149,8 +149,8 @@ $tareas_completadas = [];
     </div>
 </div>
 <script src="js/scripts.js?v=1.2"></script>
-<footer style="background-color: #dc3545; text-align: center; padding: 15px; margin-top: 30px;"> // seria nuestro cuadro donde aparecerian nuestros nombres
-        <p>Equipo: Erick mauricio artega jesus, paola, miguel angel</p>
-</footer>
+<footer style="background-color: #f2f2f2; text-align: center; padding: 15px; margin-top: 30px;"> <!-- seria nuestro cuadro donde aparecerian nuestros nombres-->
+        <p>Equipo: <br> Erick Mauricio Artega Jesus, Paola Alejandra Morales García, Miguel Ángel Ramírez Aguilar, Manuel Antonio Gutierrez López</p>
+    </footer>
 </body>
 </html>
