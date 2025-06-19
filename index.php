@@ -60,6 +60,8 @@ if ((isset($_SESSION['usuario']) && isset($_SESSION['id_usuario'])) || (isset($_
     <form action ="manejousuarios/modo_invitado.php"  method="post">
         <button type="submit" class="btn-invitado">Entrar como invitado</button>
     </form>
-    
+    <footer style="background-color: #f2f2f2; text-align: center; padding: 15px; margin-top: 30px;"> // seria nuestro cuadro donde aparecerian nuestros nombres
+        <p>Equipo: Erick Mauricio Artega Jesus, Paola Alejandra Morales García, Miguel Ángel Ramírez Aguilar, Manuel Antonio Gutierrez López</p>
+</footer>
 </body>
 </html>

@@ -149,5 +149,8 @@ $tareas_completadas = [];
     </div>
 </div>
 <script src="js/scripts.js?v=1.2"></script>
+<footer style="background-color: #dc3545; text-align: center; padding: 15px; margin-top: 30px;"> // seria nuestro cuadro donde aparecerian nuestros nombres
+        <p>Equipo: Erick mauricio artega jesus, paola, miguel angel</p>
+</footer>
 </body>
 </html>
