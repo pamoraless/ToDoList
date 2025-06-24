@@ -117,15 +117,15 @@ body.pagina-visualizador  {
     background-color: #b30000;
 }
 
- body.pagina-index {
-    font-family: 'Segoe', sans-serif;
-    max-width: 400px;
-    margin: 40px auto;
-    background-color: #fff0f0;
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid #ffcccc;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.pagina-index {
+    font-family: 'Segoe', sans-serif !important;
+    max-width: 400px !important;
+    margin: 40px auto !important;
+    background-color: #fff0f0 !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    border: 1px solid #ffcccc !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
 }
 .pagina-index h2 {
     text-align: center;
@@ -134,6 +134,8 @@ body.pagina-visualizador  {
 .pagina-index form {
     background: white;
     padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
     margin-bottom: 20px;         
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -176,3 +178,32 @@ footer {
     color: #b30000;
     font-weight: bold;
 }
+
+.fondo_menu {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-bottom: 30px
+}
+
+.boton {
+    padding: 8px 12px;
+    background-color: #b30000;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+.boton:hover {
+    background-color: #800000;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff0f0;
+    font-family: 'Segoe', sans-serif;
+}
+
