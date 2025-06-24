@@ -184,20 +184,39 @@ footer {
     position: sticky;
     top: 0;
     z-index: 100;
-    margin-bottom: 30px
+    margin-bottom: 30px;
 }
 
+.fondo_menu .navbar {
+    background-color: #b30000;
+}
+
+.fondo_menu .navbar-brand {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.fondo_menu .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+}
 .boton {
     padding: 8px 12px;
-    background-color: #b30000;
+    padding-right: 15px;
+    background-color: #e06666;
     color: white;
     border-radius: 5px;
     text-decoration: none;
-    margin-left: 10px;
+    margin-left: 15px;
     transition: background-color 0.3s;
+    border: 1.5 solid white;
+}
+
+.fondo_menu .boton:last-child{
+    margin-right: 15px;
 }
 .boton:hover {
-    background-color: #800000;
+    background-color: #f29999;
 }
 
 body {
