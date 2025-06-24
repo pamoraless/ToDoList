@@ -53,104 +53,105 @@ $tareas_completadas = [];
 <head>
     <meta charset="UTF-8">
     <title>Lista de Tareas</title>
-   <link rel="stylesheet" href="css/estilos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS Bundle-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body class="pagina-visualizador">
-<?php if (isset($_SESSION['usuario'])): ?>
-    <form action="manejousuarios/logout.php" method="post" style="text-align: right; margin-bottom: 15px;">
-        <button type="submit">Cerrar sesión</button>
-    </form>
-<?php endif; ?>
+<body>
+    <?php require_once("header.php"); ?>
+    <div class="pagina-visualizador">
+        <h1>Mi lista de tareas</h1>
 
-<h1>Mi lista de tareas</h1>
+        <!-- Formulario para crear nueva tarea -->
+        <form action="manejotareas/creartarea.php" method="post" style="text-align: center; margin-bottom: 30px;">
+            <input type="text" name="descripcion" placeholder="Nueva tarea" required>
+            <button type="submit">Agregar</button>
+        </form>
+        <div class="contenedor-listas">
+            <!-- Tareas pendientes -->
+            <div class="tareas-pendientes">
+                <h2>Tareas pendientes</h2>
+                <?php if (count($tareas_pendientes) > 0): ?>
+                    <?php foreach ($tareas_pendientes as $tarea): ?>
+                        <div class="tarea">
+                            <div>
+                                <!-- Formulario para marcar como completado -->
+                                <form class="inline" action="manejotareas/tareacompletada.php" method="get">
+                                    <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
+                                    <input type="checkbox" onchange="this.form.submit()" <?= $tarea['completada'] ? 'checked' : '' ?>>
+                                </form>
 
-<!-- Formulario para crear nueva tarea -->
-<form action="manejotareas/creartarea.php" method="post" style="text-align: center; margin-bottom: 30px;">
-    <input type="text" name="descripcion" placeholder="Nueva tarea" required>
-    <button type="submit">Agregar</button>
-</form>
-<div class="contenedor-listas">
-    <!-- Tareas pendientes -->
-    <div class="tareas-pendientes">
-        <h2>Tareas pendientes</h2>
-        <?php if (count($tareas_pendientes) > 0): ?>
-            <?php foreach ($tareas_pendientes as $tarea): ?>
-                <div class="tarea">
-                    <div>
-                        <!-- Formulario para marcar como completado -->
-                        <form class="inline" action="manejotareas/tareacompletada.php" method="get">
-                            <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
-                            <input type="checkbox" onchange="this.form.submit()" <?= $tarea['completada'] ? 'checked' : '' ?>>
-                        </form>
+                                <!-- Mostrar nombre -->
+                                <span class="<?= $tarea['completada'] ? 'completada' : '' ?>">
+                                    <?= htmlspecialchars($tarea['descripcion']) ?>
+                                </span>
+                            </div>
 
-                        <!-- Mostrar nombre -->
-                        <span class="<?= $tarea['completada'] ? 'completada' : '' ?>">
-                            <?= htmlspecialchars($tarea['descripcion']) ?>
-                        </span>
-                    </div>
+                            <div class="form-modificar" id="form-<?= $tarea['id'] ?>">
+                                <!-- Botón ✏️ -->
+                                <button type="button" class="boton-editar" onclick="mostrarInput(<?= $tarea['id'] ?>)">✏️</button>
 
-                    <div class="form-modificar" id="form-<?= $tarea['id'] ?>">
-                        <!-- Botón ✏️ -->
-                        <button type="button" class="boton-editar" onclick="mostrarInput(<?= $tarea['id'] ?>)">✏️</button>
+                                <!-- Formulario oculto -->
+                                <div class="formulario-editar" style="display: none;">
+                                    <form class="inline" action="manejotareas/modificar_tarea.php" method="post">
+                                        <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
+                                        <input type="text" name="nueva_descripcion" placeholder="Nuevo nombre" required>
+                                        <button type="submit" >✅</button>
+                                        <button type="button" onclick="cancelarEdicion(<?= $tarea['id'] ?>)">❌</button>
+                                    </form>
+                                </div>
 
-                        <!-- Formulario oculto -->
-                        <div class="formulario-editar" style="display: none;">
-                            <form class="inline" action="manejotareas/modificar_tarea.php" method="post">
+                                <!-- Botón 🗑️ -->
+                                <form class="inline" action="manejotareas/eliminartarea.php" method="get" onsubmit="return confirm('¿Eliminar esta tarea?');">
+                                    <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
+                                    <button type="submit">🗑️</button>
+                                </form>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p style="text-align: center;">No hay tareas pendientes.</p>
+                <?php endif; ?>
+            </div>
+        </div>
+            <!-- Botón para mostrar/ocultar tareas completadas -->
+        <div class="boton-toggle">
+        <button id="btn-toggle" class="toggle-btn">Ocultar tareas completadas</button>
+        </div>
+            <!-- Tareas completadas -->
+        <div class="contenedor-listas">
+            <div class="tareas-completadas" id="completadas">
+                <h2>Tareas completadas</h2>
+                <?php if (count($tareas_completadas) > 0): ?>
+                    <?php foreach ($tareas_completadas as $tarea): ?>
+                        <div class="tarea">
+                            <div>
+                                <!-- Checkbox ya marcado -->
+                                <form class="inline" action="manejotareas/descompletartarea.php" method="get">
                                 <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
-                                <input type="text" name="nueva_descripcion" placeholder="Nuevo nombre" required>
-                                <button type="submit" >✅</button>
-                                <button type="button" onclick="cancelarEdicion(<?= $tarea['id'] ?>)">❌</button>
+                                <input type="checkbox" onchange="this.form.submit()" <?= $tarea['completada'] ? 'checked' : '' ?>>
+                            </form>
+                                <span class="completado"><?= htmlspecialchars($tarea['descripcion']) ?></span>
+                            </div>
+
+                            <!-- Eliminar -->
+                            <form class="inline" action="manejotareas/eliminartarea.php" method="get" onsubmit="return confirm('¿Eliminar esta tarea?');">
+                                <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
+                                <button type="submit">🗑️</button>
                             </form>
                         </div>
-
-                        <!-- Botón 🗑️ -->
-                        <form class="inline" action="manejotareas/eliminartarea.php" method="get" onsubmit="return confirm('¿Eliminar esta tarea?');">
-                            <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
-                            <button type="submit">🗑️</button>
-                        </form>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p style="text-align: center;">No hay tareas pendientes.</p>
-        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p style="text-align: center;">No hay tareas completadas.</p>
+                <?php endif; ?>
+            </div>
+        </div>
+        <script src="js/scripts.js?v=1.2"></script>
+        <footer style="background-color: #f2f2f2; text-align: center; padding: 15px; margin-top: 30px;"> <!-- seria nuestro cuadro donde aparecerian nuestros nombres-->
+                <p>Equipo: <br> Erick Mauricio Artega Jesus, Paola Alejandra Morales García, Miguel Ángel Ramírez Aguilar, Manuel Antonio Gutierrez López</p>
+        </footer>
     </div>
-</div>
-    <!-- Botón para mostrar/ocultar tareas completadas -->
-<div class="boton-toggle">
-<button id="btn-toggle" class="toggle-btn">Ocultar tareas completadas</button>
-</div>
-    <!-- Tareas completadas -->
-<div class="contenedor-listas">
-    <div class="tareas-completadas" id="completadas">
-        <h2>Tareas completadas</h2>
-        <?php if (count($tareas_completadas) > 0): ?>
-            <?php foreach ($tareas_completadas as $tarea): ?>
-                <div class="tarea">
-                    <div>
-                        <!-- Checkbox ya marcado -->
-                        <form class="inline" action="manejotareas/descompletartarea.php" method="get">
-                        <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
-                        <input type="checkbox" onchange="this.form.submit()" <?= $tarea['completada'] ? 'checked' : '' ?>>
-                    </form>
-                        <span class="completado"><?= htmlspecialchars($tarea['descripcion']) ?></span>
-                    </div>
-
-                    <!-- Eliminar -->
-                    <form class="inline" action="manejotareas/eliminartarea.php" method="get" onsubmit="return confirm('¿Eliminar esta tarea?');">
-                        <input type="hidden" name="id" value="<?= $tarea['id'] ?>">
-                        <button type="submit">🗑️</button>
-                    </form>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p style="text-align: center;">No hay tareas completadas.</p>
-        <?php endif; ?>
-    </div>
-</div>
-<script src="js/scripts.js?v=1.2"></script>
-<footer style="background-color: #f2f2f2; text-align: center; padding: 15px; margin-top: 30px;"> <!-- seria nuestro cuadro donde aparecerian nuestros nombres-->
-        <p>Equipo: <br> Erick Mauricio Artega Jesus, Paola Alejandra Morales García, Miguel Ángel Ramírez Aguilar, Manuel Antonio Gutierrez López</p>
-    </footer>
 </body>
 </html>
