@@ -11,17 +11,17 @@
  unset($_SESSION['login_error']);
 
 // Si ya está logeado o es invitado, se redirige al visualizadortareas.php
-/*if ((isset($_SESSION['usuario']) && isset($_SESSION['id_usuario'])) || (isset($_SESSION['es_invitado']) && $_SESSION['es_invitado'] === true)){
+if ((isset($_SESSION['usuario']) && isset($_SESSION['id_usuario'])) || (isset($_SESSION['es_invitado']) && $_SESSION['es_invitado'] === true)){
     header("Location: visualizadortareas.php");
     //exit();
-}*/
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Organiza tu vida - TaskFlow</title>
+    <title>Bienvenido - Tareas</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,25 +33,27 @@
 <body>
     <?php require_once("header.php"); ?>
     
-    <div class="pagina-index" style="text-align: center; padding: 40px 20px;">
-        <h1 style="color: #b30000;">TaskFlow</h1>
-        <p style="font-size: 1.2rem; margin-bottom: 25px;">
-            Organiza tus tareas, simplifica tu día y mantén tu mente libre de pendientes.  
-        </p>
+    <div class="pagina-index">
 
-        <img src="img/organiza_tareas.jpeg" alt="Organización de tareas" style="max-width: 100%; height: auto; border-radius: 10px; margin-bottom: 30px;">
+        <h2> Bienvenido a la Lista de Tareas</h2>
+    
+        <!-- Formulario de Inicio de Sesión -->
+        <form action="manejousuarios/login.php" method="post">
+            <h3>Iniciar sesión</h3>
+            <input type="text" name="nombre_usuario" placeholder="Nombre de Usuario" required />
+            <input type="password" name="contrasena" placeholder="Contraseña" required />
+            <button type="submit">Entrar</button>
+        </form>
 
-        <h3 style="color: #b30000;">¿Qué puedes hacer con TaskFlow?</h3>
-        <ul style="list-style: none; padding: 0; font-size: 1rem; margin-bottom: 30px;">
-            <li>✅ Añadir tareas pendientes fácilmente</li>
-            <li>✅ Marcar tareas como completadas</li>
-            <li>✅ Editarlas cuando cambien tus planes</li>
-            <li>✅ Organizar tus pendientes en un solo lugar</li>
-        </ul>
+        <?php if(!empty($login_error)): ?>
+            <div style="color: red; text-align: center; margin-bottom: 15px;">
+                <?= htmlspecialchars($login_error) ?>
+            </div>
+        <?php endif; ?>
 
-        
         <footer style="background-color: #f2f2f2; text-align: center; padding: 15px; margin-top: 30px;"> <!-- seria nuestro cuadro donde aparecerian nuestros nombres-->
             <p>Equipo: <br> Erick Mauricio Arteaga Velázquez, Paola Alejandra Morales García, Miguel Ángel Ramírez Aguilar, Manuel Antonio Gutiérrez López</p>
         </footer>
     </div>
+</body>
 </html>

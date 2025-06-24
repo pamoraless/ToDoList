@@ -23,9 +23,9 @@
                             <a class="nav-link" href="#">Contactanos</a>
                         </li>
                     </ul>
-                    <a href="manejousuarios/login.php" class="boton">Inicia Session</a>
-                    <a href="manejousuarios/registro.php" class="boton">Registrate</a>
-                    <a href="manejousuarios/modo_invitado.php" class="boton">Registrate</a>
+                    <a href="loginfe.php" class="boton">Inicia Session</a>
+                    <a href="registrofe.php" class="boton">Registrate</a>
+                    <a href="manejousuarios/modo_invitado.php" class="boton">Modo Invitado</a>
                 </div>
                 <?php else: ?>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
