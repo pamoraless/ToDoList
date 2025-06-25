@@ -35,7 +35,7 @@ if ((isset($_SESSION['usuario']) && isset($_SESSION['id_usuario'])) || (isset($_
     
     <div class="pagina-index">
 
-        <h2> Bienvenido a la Lista de Tareas</h2>
+        <h2> Bienvenido a TaskFlow</h2>
     
         <!-- Formulario de Inicio de Sesión -->
         <form action="manejousuarios/login.php" method="post">

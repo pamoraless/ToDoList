@@ -35,7 +35,7 @@
     
     <div class="pagina-index">
 
-        <h2> Bienvenido a la Lista de Tareas</h2>
+        <h2> Bienvenido a TaskFlow</h2>
         <!--Formulario de Registro -->
     
         <form action="manejousuarios/registro.php" method="post">
